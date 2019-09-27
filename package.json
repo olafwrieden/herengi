@@ -1,0 +1,26 @@
+{
+  "name": "herengi",
+  "version": "1.0.0",
+  "description": "A BankEngine Open Banking Hackathon Project.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olafwrieden/herengi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/olafwrieden/herengi/issues"
+  },
+  "homepage": "https://github.com/olafwrieden/herengi#readme",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1"
+  }
+}
