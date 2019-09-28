@@ -5,12 +5,13 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
+const host = process.env.HOST;
 app.use(express.json());
 app.use(express.static("views"));
 app.set("view engine", "ejs");
 
 // BankEngine Configuration
-const redirectUri = `http://localhost:${port}/callback`;
+const redirectUri = `${host}:${port}/callback`;
 const scopes = ["userinfo", "accounts", "balance", "transactions", "payments"];
 const apiClient = new ApiClient();
 const authClient = new AuthClient(
