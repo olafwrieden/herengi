@@ -1,15 +1,43 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="herengi.css">
+    <link rel="stylesheet" href="css/herengi.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <script src="js/herengi.js"></script>
+    
 </head>
 
 <body>
     <header>
         <h1 class="logo">Herengi</h1>
     </header>
-    <div>
-        <p>$150</p>
+
+    <div class="personal-info">
+        <h2 class="name">Chloe</h2>
+        <p>$40</p>
+    </div>
+
+    <div class="toa">
+        <div class="toa-card">
+            <div class="toa-item"></div>
+
+        </div>
+    </div>
+
+    <div class="wishlist">
+        <p>Whainga</p>
+        <input type="text" id="itemInput" placeholder="Item...">
+        <input type="text" id="inputPrice" placeholder="Price...">
+        <span onclick="newElement()" class="btn">Add</span>
+        <div class="list">
+            <ul id="myUL">
+                    <li>Movies: $20</li>
+                    <li>Happy Meal: $6</li>
+                    <li>Bike: $80</li>
+            </ul>
+        </div>
+        
+        <span onclick="removeElement()" class="btn">Remove</span>
     </div>
 
 </body>
