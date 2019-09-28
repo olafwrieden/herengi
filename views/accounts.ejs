@@ -7,7 +7,7 @@
     <title>Herengi - My Accounts</title>
     <link rel="stylesheet" href="style.css" />
     <link
-      href="https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap"
+      href="https://fonts.googleapis.com/css?family=Noto+Sans|Pacifico&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -15,23 +15,21 @@
     <script type="text/javascript" src="script.js"></script>
     <header class="header">
       <h1 class="logo"><a href="#">Herengi</a></h1>
-      <ul class="main-nav">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Portfolio</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
     </header>
-    <% Object.keys(accounts).forEach(function(account) { %>
-    <div>
-      <p>Select your account</p>
-      <!-- Color the Account based on type (ie. transational or savings) -->
-      <button
-        onClick="window.location='/accounts/<%= accounts[account].accountId %>?accessToken=<%= accessToken %>'"
+    <h4>Tap an account to get started</h4>
+    <div class="accounts">
+      <% Object.keys(accounts).forEach(function(account) { %>
+      <div
+        class="account"
+        onclick="window.location='/accounts/<%= accounts[account].accountId %>?accessToken=<%= accessToken %>'"
       >
-        <%= accounts[account].displayName %>
-      </button>
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTUCLAB1Qn-CjmS82OdEe4IA7wcCbtjkou9eALdMCuC7I1ptzJl"
+          alt="avatar"
+        />
+        <p class="center"><%= accounts[account].displayName %></p>
+      </div>
+      <% }); %>
     </div>
-    <% }); %>
   </body>
 </html>
