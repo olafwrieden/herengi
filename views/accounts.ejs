@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Herengi - My Accounts</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Noto+Sans|Pacifico&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <script type="text/javascript" src="script.js"></script>
+    <header class="header">
+      <h1 class="logo"><a href="#">Herengi</a></h1>
+    </header>
+    <h4>Tap an account to get started</h4>
+    <div class="accounts">
+      <% Object.keys(accounts).forEach(function(account) { %>
+      <div
+        class="account"
+        onclick="window.location='/accounts/<%= accounts[account].accountId %>?accessToken=<%= accessToken %>'"
+      >
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTUCLAB1Qn-CjmS82OdEe4IA7wcCbtjkou9eALdMCuC7I1ptzJl"
+          alt="avatar"
+        />
+        <p class="center"><%= accounts[account].displayName %></p>
+      </div>
+      <% }); %>
+    </div>
+  </body>
+</html>
