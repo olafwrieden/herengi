@@ -10,7 +10,7 @@ const app = express();
 const port = process.env.PORT;
 
 app.use(express.json());
-//app.use(express.static("public"));
+app.use(express.static("public"));
 
 const clientId = "hackathon2019";
 const clientSecret = "secret";
