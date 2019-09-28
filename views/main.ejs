@@ -5,6 +5,7 @@
 <p>Number: <%= account.accountNumber %></p>
 <p>Available: <%= account.available %></p>
 <p>Current: <%= account.current %></p>
+<p>In the past seven days, the account <%= account.lastSeven.change %> by: <%= account.lastSeven.total %></p>
 
 <button onClick="window.location='/accounts?accessToken=<%= accessToken %>'">
   Back to My Accounts

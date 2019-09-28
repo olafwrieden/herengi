@@ -1,3 +1,5 @@
+// import { format, formatDistance, formatRelative, subDays } from 'date-fns'
+const { subDays, formatDistance } = require("date-fns");
 const express = require("express");
 const dotenv = require("dotenv");
 const { AuthClient, ApiClient } = require("bankengine-js-sdk");
@@ -62,11 +64,43 @@ app.get("/accounts/:id", async (req, res) => {
   const id = req.params.id;
   const accessToken = req.query.accessToken;
   let account = await getAccountData(id, accessToken);
+  let lastSevenTotal = await lastSevenDays(account, accessToken, id);
+  Object.assign(account, { lastSeven: lastSevenTotal })
   return res.render("main", {
     account,
     accessToken
   });
 });
+
+/**
+ * Returns total week change.
+ * @param {Object} account given account for which to retrieve transactions
+ * @param {String} accessToken access token for BankEngine API
+ * @param {Number} accountID account ID for which to retrieve data
+ */
+const lastSevenDays = async (account, accessToken, accountID) => {
+  let sevenDaysAgo = subDays(new Date(account.updatedTimestamp), 7);
+  const transactions = await apiClient.getTransactions(accessToken, accountID, sevenDaysAgo);
+
+  let total = 0;
+  let change = "";
+  for (let i = 0; i < transactions.data.length; i++) {
+    total += transactions.data[i].amount;
+  }
+
+  switch (Math.sign(total)) {
+    case 1:
+      change = "increased";
+      break;
+    case -1:
+      change = "decreased";
+      break;
+    default:
+      change = "same";
+  }
+
+  return { total, change };
+}
 
 /**
  * Returns a given account's details (incl. balance).
@@ -78,7 +112,6 @@ const getAccountData = async (accountID, accessToken) => {
   const balance = await apiClient.getBalance(accessToken, accountID);
   return formatReturnData(account.data[0], balance.data[0]);
 };
-
 /**
  * Merges Account and Balance data into one account object representation.
  * @param {Object} account account object whose data to merge
