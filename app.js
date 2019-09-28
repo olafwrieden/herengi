@@ -13,8 +13,8 @@ app.use(express.json());
 app.use(express.static("views"));
 app.set("view engine", "ejs");
 
-const clientId = "hackathon2019";
-const clientSecret = "secret";
+const clientId = process.env.CLIENT_ID;
+const clientSecret = process.env.CLIENT_SECRET;
 const redirectUri = "http://localhost:5000/callback";
 
 const authClient = new AuthClient(clientId, clientSecret, redirectUri);
