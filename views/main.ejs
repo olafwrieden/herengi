@@ -1,1 +1,11 @@
-<p>sdfghjkl;</p>
+<h2>Name: <%= account.displayName %></h2>
+<p>Currency: <%= account.currency %></p>
+<p>Time Stamp: <%= account.updatedTimestamp %></p>
+<p>Type: <%= account.accountType %></p>
+<p>Number: <%= account.accountNumber %></p>
+<p>Available: <%= account.available %></p>
+<p>Current: <%= account.current %></p>
+
+<button onClick="window.location='/accounts?accessToken=<%= accessToken %>'">
+  Back to My Accounts
+</button>

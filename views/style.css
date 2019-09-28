@@ -8,14 +8,14 @@
 } */
 
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 body {
-	font-family: 'Montserrat', sans-serif;
-	line-height: 1.6;
-	margin: 0;
+  font-family: "Montserrat", sans-serif;
+  line-height: 1.6;
+  margin: 0;
   min-height: 100vh;
-  background-color: #41D3BD;
+  background-color: #41d3bd;
 }
 ul {
   margin: 0;
@@ -23,44 +23,46 @@ ul {
   list-style: none;
 }
 
-h2, h3, a {
-  color:white;
+h2,
+h3,
+a {
+  color: white;
   font-size: 50px;
 }
 
 a {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 .logo {
-	margin: 0;
+  margin: 0;
   font-size: 1.45em;
-  font-family: 'Patrick Hand', cursive;
+  font-family: "Patrick Hand", cursive;
 }
 
 .main-nav {
-	margin-top: 5px;
-
+  margin-top: 5px;
 }
-.logo a, .main-nav a {
-	padding: 10px 15px;
-	text-align: center;
-	display: block;
+.logo a,
+.main-nav a {
+  padding: 10px 15px;
+  text-align: center;
+  display: block;
 }
 
 .main-nav a {
-	color: #34495e;
-	font-size: .99em;
+  color: #34495e;
+  font-size: 0.99em;
 }
 
 .main-nav a:hover {
-	color: white;
+  color: white;
 }
 
 .header {
-	padding-top: .5em;
-	padding-bottom: .5em;
-  background-color: #41D3BD;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  background-color: #41d3bd;
 }
 
 /* ================================= 
@@ -68,21 +70,21 @@ a {
 ==================================== */
 
 @media (min-width: 769px) {
-	.header, .main-nav {
-		display: flex;
+  .header,
+  .main-nav {
+    display: flex;
   }
-  
-	.header {
-		flex-direction: column;
-		align-items: center;
-		margin: 0 auto;
-	}
+
+  .header {
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+  }
 }
 
 @media (min-width: 1025px) {
-	.header {
-		flex-direction: row;
-		justify-content: space-between;
-	}
-
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }

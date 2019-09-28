@@ -1,144 +1,98 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const axios = require("axios");
-
 const { AuthClient, ApiClient } = require("bankengine-js-sdk");
-
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
-
 app.use(express.json());
 app.use(express.static("views"));
 app.set("view engine", "ejs");
 
-const clientId = process.env.CLIENT_ID;
-const clientSecret = process.env.CLIENT_SECRET;
-const redirectUri = "http://localhost:5000/callback";
-
-const authClient = new AuthClient(clientId, clientSecret, redirectUri);
-const apiClient = new ApiClient();
-
-let TOKEN = null;
-
+// BankEngine Configuration
+const redirectUri = `http://localhost:${port}/callback`;
 const scopes = ["userinfo", "accounts", "balance", "transactions", "payments"];
+const apiClient = new ApiClient();
+const authClient = new AuthClient(
+  process.env.CLIENT_ID,
+  process.env.CLIENT_SECRET,
+  redirectUri
+);
 
 /**
- * Default Route, Render Client Page
+ * Renders Default Route
  */
 app.get("/", (req, res) => {
   const authURL = authClient.generateAuthorizationURL(scopes, "nonce", "state");
   res.redirect(authURL);
 });
 
+/**
+ * BankEngine API Callback
+ */
 app.get("/callback", async (req, res) => {
   const code = req.query.code;
 
-  // should validate state
-  // const state = req.query.state;
-
-  // exchange code for access token and optionaly redirect token
+  // Exchange Code for Access Token
   const tokens = await authClient.exchangeToken(code);
-  const accessToken = tokens.access_token;
+  const { access_token } = tokens;
 
-  TOKEN = accessToken;
-
-  // return the access token to the client
-  res.redirect(`/app?accessToken=${accessToken}`);
-});
-
-app.get("/app", async (req, res) => {
-  const accessToken = req.query.accessToken;
-  console.log(accessToken);
-  const accounts = await apiClient.getAccounts(accessToken);
-
-  let html = "<html>";
-  html += "<ul>";
-
-  for (const account of accounts.data) {
-    // query 3 months of transactions from the users account
-    const balances = await apiClient.getAccounts(
-      accessToken,
-      account.accountId
-    ); //   getBalance(accessToken, account.accountId);
-    //const balances = await apiClient.getBalance(accessToken, account.accountId);
-
-    html += `<li><a href=\"/data?accessToken=${accessToken}&accountid=${account.accountId}\">Link to account</a></li>`;
-  }
-
-  html += "</ul></html>";
-
-  //res.send(html);
-  //res.sendFile(__dirname + "/public/index.html");
-  return res.render("page", {
-    accounts: accounts
-  });
+  // Redirect to Account Selector
+  res.redirect(`/accounts?accessToken=${access_token}`);
 });
 
 /**
- * Dummy Data
- */
-app.get("/dummy-data", (req, res) => {
-  let data = {
-    total: 24.75,
-    this_week: 3.55
-  };
-  res.send(data);
-});
-
-/**
- * returns accounts data
- */
-app.get("/data", async (req, res) => {
-  const id = req.query.accountId;
-  const accessToken = req.query.accessToken || TOKEN;
-  // if (!id || !accessToken) {
-  //   return res.send("No id or token parameter");
-  // }
-
-  let returnData = {};
-
-  const accounts = await apiClient.getAccounts(accessToken);
-  for (let i = 0; i < accounts.data.length; i++) {
-    if (accounts.data[i].accountId === id) {
-      Object.assign(returnData, accounts.data[i]);
-      const balances = await getAccountBalance(accessToken, id);
-      Object.assign(returnData, balances.data[0]);
-      return res.send(returnData);
-    }
-  }
-  return res.send(`No account with this id: ${id}`);
-});
-
-/**
- * returns accounts data
+ * Renders all accounts of the user
  */
 app.get("/accounts", async (req, res) => {
   const accessToken = req.query.accessToken;
-  let accounts = await apiClient.getAccounts(accessToken);
-  return accounts ? res.send(accounts.data) : res.send(null);
+  const accounts = await apiClient.getAccounts(accessToken);
+  return res.render("accounts", {
+    accounts: accounts.data,
+    accessToken
+  });
 });
 
 /**
- * returns account data by id
+ * Renders the given account's data.
  */
 app.get("/accounts/:id", async (req, res) => {
   const id = req.params.id;
-  const accessToken = req.query.accessToken || TOKEN;
-  let account = await apiClient.getAccount(accessToken, id);
+  const accessToken = req.query.accessToken;
+  let account = await getAccountData(id, accessToken);
   return res.render("main", {
-    account: account
+    account,
+    accessToken
   });
-  //return account ? res.send(account.data[0]) : res.send(null);
 });
 
 /**
- * Returns the given account's balance
+ * Returns a given account's details (incl. balance).
+ * @param {Number} accountID account ID for which to retrieve data
+ * @param {String} accessToken access token for BankEngine API
  */
-const getAccountBalance = async (accessToken, id) => {
-  let result = await apiClient.getBalance(accessToken, id);
-  return result ? result : null;
+const getAccountData = async (accountID, accessToken) => {
+  const account = await apiClient.getAccount(accessToken, accountID);
+  const balance = await apiClient.getBalance(accessToken, accountID);
+  return formatReturnData(account.data[0], balance.data[0]);
+};
+
+/**
+ * Merges Account and Balance data into one account object representation.
+ * @param {Object} account account object whose data to merge
+ * @param {Object} balance balance object whose data to merge
+ */
+const formatReturnData = (account, balance) => {
+  return {
+    displayName: account.displayName,
+    accountType: account.accountType,
+    accountNumber: account.accountNumber,
+    currency: account.currency,
+    updatedTimestamp: balance.updatedTimestamp,
+    provider: account.provider,
+    available: balance.available,
+    current: balance.current
+  };
 };
 
 app.listen(port, () => console.log(`Herengi API listening on port ${port}!`));
