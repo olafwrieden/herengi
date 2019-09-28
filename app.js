@@ -14,7 +14,12 @@ app.use(express.static("views"));
 app.set("view engine", "ejs");
 
 // BankEngine Configuration
-const redirectUri = `${host}:${port}/callback`;
+let redirectUri;
+if (process.env.NODE_ENV === "production") {
+  redirectUri = `${host}/callback`;
+} else {
+  redirectUri = `${host}:${port}/callback`;
+}
 const scopes = ["userinfo", "accounts", "balance", "transactions", "payments"];
 const apiClient = new ApiClient();
 const authClient = new AuthClient(
@@ -65,7 +70,7 @@ app.get("/accounts/:id", async (req, res) => {
   const accessToken = req.query.accessToken;
   let account = await getAccountData(id, accessToken);
   let lastSevenTotal = await lastSevenDays(account, accessToken, id);
-  Object.assign(account, { lastSeven: lastSevenTotal })
+  Object.assign(account, { lastSeven: lastSevenTotal });
   return res.render("main", {
     account,
     accessToken
@@ -80,7 +85,11 @@ app.get("/accounts/:id", async (req, res) => {
  */
 const lastSevenDays = async (account, accessToken, accountID) => {
   let sevenDaysAgo = subDays(new Date(account.updatedTimestamp), 7);
-  const transactions = await apiClient.getTransactions(accessToken, accountID, sevenDaysAgo);
+  const transactions = await apiClient.getTransactions(
+    accessToken,
+    accountID,
+    sevenDaysAgo
+  );
 
   let total = 0;
   let change = "";
@@ -100,7 +109,7 @@ const lastSevenDays = async (account, accessToken, accountID) => {
   }
 
   return { total, change };
-}
+};
 
 /**
  * Returns a given account's details (incl. balance).
