@@ -67,8 +67,8 @@ app.get("/app", async (req, res) => {
 
   html += "</ul></html>";
 
-  res.send(html);
-  //res.sendFile(__dirname + "/public/index.html");
+  //res.send(html);
+  res.sendFile(__dirname + "/public/index.html");
 });
 
 /**
