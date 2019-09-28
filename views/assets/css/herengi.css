@@ -1,0 +1,241 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.logo {
+  margin: 0;
+  font-size: 50px;
+  font-family: "Pacifico", cursive;
+  text-align: center;
+  width: 100%;
+  color: white;
+  margin-top: 5%;
+}
+
+#funds {
+  text-align: center;
+}
+
+#availFunds{
+  margin-top: 5%;
+  margin-bottom: 0;
+}
+
+.funds {
+  margin: 0;
+  font-size: 50px;
+  font-family: "Pacifico", cursive;
+  text-align: center;
+  width: 100%;
+  color: white;
+}
+
+ul{
+    margin: 10px, 10px, 10px, 10px;
+    padding: 0;
+}
+
+ul li {
+    cursor: pointer;
+    position: relative;
+    padding: 12px 8px 12px 12px;
+    background: #eee;
+    list-style-type: none;
+    /*font-size: 18px;*/
+    transition: 0.2s;
+  }
+
+  ul li:hover {
+    background: #41D3BD;
+    color: #fff
+  }
+
+  .wishlist {
+      margin-left: 250px;
+      margin-right: 250px;
+      margin-bottom: 30px;
+  }
+
+  ul li.checked {
+    background: #888;
+    color: #fff;
+  }
+
+  input {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    padding: 10px;
+    float: left;
+    font-size: 16px;
+  }
+
+  .btn {
+    padding: 10px;
+    background: #41D3BD;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 10px;
+  }
+
+  .list {
+    margin-top: 20px;
+  }
+
+  html {
+    min-height: 100%;
+    background: #7474bf; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        rgba(52, 138, 199, 0.94),
+        rgba(116, 116, 191, 0.94)
+      ),
+      url(https://images.pexels.com/photos/259165/pexels-photo-259165.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        rgba(52, 138, 199, 0.94),
+        rgba(116, 116, 191, 0.94)
+      ),
+      url(https://images.pexels.com/photos/259165/pexels-photo-259165.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: "Montserrat", sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    min-height: 100vh;
+    /* background-color: #41d3bd; */
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  h2,
+  h3,
+  a {
+    color: white;
+    font-size: 20px;
+    margin: 0 auto;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  .main-nav {
+    margin-top: 5px;
+  }
+  .logo a,
+  .main-nav a {
+    padding: 10px 15px;
+    text-align: center;
+    display: block;
+    font-size: 6em;
+  }
+  
+  .main-nav a {
+    color: #34495e;
+    font-size: 0.99em;
+  }
+
+  p {
+    color: white;
+    text-align: center;
+  }
+  
+  .main-nav a:hover {
+    color: white;
+  }
+  
+  .header {
+    /* padding-top: 0.5em;
+    padding-bottom: 0.5em; 
+    background-color: #ff860a;*/
+    opacity: 0.8;
+    text-align: center;
+  }
+  
+  .accounts {
+    width: 100%;
+    margin-top: 10%;
+    text-align: center;
+  }
+  
+  .account {
+    cursor: pointer;
+    width: 250px;
+    height: 250px;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 10px solid #f2c57c;
+    transition: transform 0.2s;
+    font-size: 30px;
+    text-transform: uppercase;
+    color: white;
+    line-height: 200px;
+  }
+  
+  .account:not(:last-child) {
+    margin-right: 2%;
+  }
+  
+  .account:hover {
+    transform: scale(1.2);
+  }
+  
+  .account img {
+    display: inline;
+    margin: 0 auto;
+    height: 100%;
+    width: auto;
+  }
+  
+  h4 {
+    text-align: center;
+    font-family: "Noto Sans", sans-serif;
+    color: rgb(255, 255, 255);
+  }
+  
+  .center {
+    position: absolute;
+    font-size: 25px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -25%);
+    font-family: "Noto Sans", sans-serif;
+  }
+  
+  /* ================================= 
+    Media Queries
+  ==================================== */
+  
+  @media (min-width: 769px) {
+    .header,
+    .main-nav {
+      display: flex;
+    }
+  
+    .header {
+      flex-direction: column;
+      align-items: center;
+      margin: 0 auto;
+    }
+  }
+  
+  @media (min-width: 1025px) {
+    .header {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+
