@@ -1,53 +1,85 @@
 <html>
+  <head>
+    <link rel="stylesheet" href="/assets/css/herengi.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Noto+Sans|Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <script src="/assets/js/index.js"></script>
+    <title>Herengi - <%= account.displayName %></title>
+  </head>
 
-<head>
-  <link rel="stylesheet" href="/assets/css/herengi.css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Noto+Sans|Pacifico&display=swap" rel="stylesheet" />
-  <script src="/assets/js/index.js"></script>
-  <title>Herengi - Account <%= account.displayName %></title>
+  <body>
+    <header>
+      <h1 class="logo">Herengi</h1>
+      <p id="availFunds">Available Funds:</p>
+      <!-- <h4 id="funds"> <%= account.available %> </h4> -->
+      <h3 id="funds" data-funds="<%= account.available %>">
+        $<%= account.available %>
+      </h3>
+    </header>
 
-</head>
-
-<body>
-  <header>
-    <h1 class="logo">Herengi</h1>
-    <p id="availFunds">Available Funds: </p>
-    <!-- <h4 id="funds"> <%= account.available %> </h4> -->
-    <h3 id="funds" data-funds="<%= account.available %>">$<%= account.available %></h3>
-  </header>
-
-  <div class="personal-info">
-    <p>Account Name: <%= account.displayName %></p>
-    <p class="name">Account Owner: Chloe</p>
-    <p>Current Funds: <%= account.current %></p>
-  </div>
-
-  <div class="toa">
-    <div class="toa-card">
-      <div class="toa-item"></div>
+    <div class="personal-info">
+      <p>Account Name: <%= account.displayName %></p>
+      <p class="name">Account Owner: Chloe</p>
+      <p>Current Funds: <%= account.current %></p>
     </div>
-  </div>
 
+    <div class="toa">
+      <div class="toa-card">
+        <div class="toa-item"></div>
+      </div>
+    </div>
+
+    <!-- <div class="wishlist">
+      <h4>Whainga</h4>
+      <input type="text" id="itemInput" placeholder="Item..." />
+      <input type="text" id="inputPrice" placeholder="Price..." />
+      <span onclick="newElement()" class="btn">Add</span>
+      <div class="list">
+        <ul id="myUL">
+          <li data-amount="20" onclick="addToBuy(20)">Movies: $20</li>
+          <li data-amount="80" onclick="addToBuy(80)">Bike: $80</li>
+        </ul>
+      </div>
+
+      <span onclick="removeElement()" class="btn" id="closeBtn">Remove</span>
+    </div> -->
   <div class="wishlist">
     <h4>Whainga</h4>
     <input type="text" id="itemInput" placeholder="Item...">
     <input type="text" id="inputPrice" placeholder="Price...">
-    <span onclick="newElement()" class="btn">Add</span>
+    <span onclick="newElement()" class="btn" id="addbtn">Add</span>
     <div class="list">
       <ul id="myUL">
-        <li>Movies: $20</li>
-        <li>Bike: $80</li>
+        <!-- <li>Movies: $20</li>
+        <li>Bike: $80</li> -->
       </ul>
     </div>
 
-    <span onclick="removeElement()" class="btn" id="closeBtn">Remove</span>
+    <div id="bottomBtns">
+        <span class="btn" id="backbtn" onClick="window.location='/accounts?accessToken=<%= accessToken %>'">
+          Back to My Accounts
+        </span>
+        <span onclick="removeElement()" class="btn" id="removeBtn">Remove</span>
+    </div>
+    
+    
   </div>
 
-  <button class="btn" onClick="window.location='/accounts?accessToken=<%= accessToken %>'">
-    Back to My Accounts
-  </button>
+  
 
 </body>
 
+    <!-- <button
+      class="btn"
+      onClick="window.location='/accounts?accessToken=<%= accessToken %>'"
+    >
+      Back to My Accounts
+    </button> -->
+  </body>
 </html>
