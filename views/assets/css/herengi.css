@@ -2,6 +2,14 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+#itemInput {
+  margin-right: 1%;
+}
+
+#inputPrice{
+  margin-right: 1%;
+  margin-left: 1%;
+}
 .logo {
   margin: 0;
   font-size: 50px;
@@ -82,7 +90,24 @@ ul li {
   }
 
   .list {
-    margin-top: 20px;
+    margin-top: 4%;
+    margin-bottom: 3%;
+  }
+
+  #bottomBtns{
+    margin-bottom: 20%;
+  }
+
+  #addbtn {
+    margin-top: 5px;
+    margin-left: 1%;
+  }
+
+  #backbtn {
+    margin-right: 32.5%;
+  }
+  #removeBtn{
+    margin-left: 32.5%;
   }
 
   html {
