@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/olafwrieden/herengi#readme",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bankengine-js-sdk": "^0.1.1",
     "date-fns": "^2.4.1",
     "dotenv": "^8.1.0",
